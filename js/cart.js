@@ -266,50 +266,61 @@ function collectOrderDetails() {
   }
   
   // Function to handle the checkout process
-  function checkout() {
-    const username = 'testUser'; // Replace with actual username
-    const { orderItems, quantity } = collectOrderDetails();
-    const orderDate = new Date().toISOString();
-  
-    // Add order details to the database
-    addOrderToDatabase(username, orderItems, quantity, orderDate);
-  
-    // Display order successful message
-    alert('Order successful!');
-  
-    // Clear the cart folder in Firebase Storage
-    clearCartFromFirebase();
-  
-    // // Clear the cart table in the UI
-    // const tableBody = document.getElementById('cart-table').getElementsByTagName('tbody')[0];
-    // tableBody.innerHTML = ''; // Clearing all rows
-    // document.getElementById('grand-total').innerHTML = `Grand Total: $0.00`;
-    
-    // Redirect to feedback.html
-    window.location.href = 'feedback.html';
-  
-  }
-  
-  // Function to clear the cart folder in Firebase Storage
-  function clearCartFromFirebase() {
-    const cartRef = ref(storage, 'CartFolder/cart/');
-  
-    listAll(cartRef).then((res) => {
-      res.items.forEach((itemRef) => {
-        deleteObject(itemRef).then(() => {
-          console.log(`Deleted ${itemRef.fullPath} successfully.`);
-        }).catch((error) => {
-          console.error(`Error deleting ${itemRef.fullPath}:`, error);
-        });
-      });
-    }).catch((error) => {
-      console.error("Error listing items in 'cart' folder:", error);
+ // Function to handle the checkout process
+function checkout() {
+  const username = 'testUser'; // Replace with actual username
+  const { orderItems, quantity } = collectOrderDetails();
+  const orderDate = new Date().toISOString();
+
+  // Add order details to the database
+  addOrderToDatabase(username, orderItems, quantity, orderDate);
+
+  // Clear the cart folder in Firebase Storage
+  clearCartFromFirebase()
+    .then(() => {
+      // Clear the cart table in the UI
+      const tableBody = document.getElementById('cart-table').getElementsByTagName('tbody')[0];
+      tableBody.innerHTML = ''; // Clearing all rows
+
+      // Update the grand total in the UI
+      document.getElementById('grand-total').innerHTML = `Grand Total: $0.00`;
+
+      // Redirect to feedback.html
+      window.location.href = 'feedback.html';
+    })
+    .catch((error) => {
+      console.error('Error clearing cart from Firebase:', error);
     });
-  }
-  
-  document.getElementById('checkoutBtn').addEventListener('click', () => {
-    checkout();
+}
+
+// Function to clear the cart folder in Firebase Storage
+function clearCartFromFirebase() {
+  return new Promise((resolve, reject) => {
+    const cartRef = ref(storage, 'CartFolder/cart/');
+    listAll(cartRef)
+      .then((res) => {
+        const deletePromises = res.items.map((itemRef) => deleteObject(itemRef));
+        Promise.all(deletePromises)
+          .then(() => {
+            console.log('All items deleted from Firebase Storage successfully.');
+            resolve();
+          })
+          .catch((error) => {
+            console.error('Error deleting items from Firebase Storage:', error);
+            reject(error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error listing items in 'cart' folder:", error);
+        reject(error);
+      });
   });
+}
+
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+  checkout();
+});
+
   
 
  
