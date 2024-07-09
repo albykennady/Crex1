@@ -280,10 +280,14 @@ function collectOrderDetails() {
     // Clear the cart folder in Firebase Storage
     clearCartFromFirebase();
   
-    // Clear the cart table in the UI
-    const tableBody = document.getElementById('cart-table').getElementsByTagName('tbody')[0];
-    tableBody.innerHTML = ''; // Clearing all rows
-    document.getElementById('grand-total').innerHTML = `Grand Total: $0.00`;
+    // // Clear the cart table in the UI
+    // const tableBody = document.getElementById('cart-table').getElementsByTagName('tbody')[0];
+    // tableBody.innerHTML = ''; // Clearing all rows
+    // document.getElementById('grand-total').innerHTML = `Grand Total: $0.00`;
+    
+    // Redirect to feedback.html
+    window.location.href = 'feedback.html';
+  
   }
   
   // Function to clear the cart folder in Firebase Storage
