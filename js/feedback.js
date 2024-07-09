@@ -36,7 +36,7 @@ function submitFeedback() {
         timestamp: new Date().toISOString() // Optional: Add a timestamp for each feedback entry
     }).then(() => {
         // alert('Feedback submitted successfully!');
-        document.querySelector('.feedback').innerHTML = '<div class="thank-you-message">Thank you for your feedback!</div>';
+        document.querySelector('.feedback').innerHTML = '<div class="thank-you-message"><video autoplay muted width="1920" height="1080" controls><source src="assets/cf1.2assets/testy.mp4" type="video/mp4"></video></div>';
     }).catch((error) => {
         console.error('Error submitting feedback:', error);
     });
