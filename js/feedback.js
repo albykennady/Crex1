@@ -23,7 +23,7 @@ document.getElementById('submitFeedbackButton').addEventListener('click', submit
 function submitFeedback() {
     const rating = document.querySelector('input[name="rating"]:checked').value;
     const comment = document.getElementById('comment').value;
-    const username = "vihaan01";
+    const username = "athira01";
 
     const feedbackRef = dbRef(database, 'crex/feedback/' + username);
 
