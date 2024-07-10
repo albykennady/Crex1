@@ -9,7 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="css/designtool.css">
     <title>XFinityMedia</title>
+   
+
     
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,43 +43,45 @@
         <div class="card-body">
             <center><h4 class="card-title">Custom T-Shirt Design Tool</h4></center><br>
             <div class="row" style="padding: 10px 0px;">
-                <div class="col-md-4">
+                <div class="col-md-3">
+                    <!-- The logo selection cards -->
+                    <label for="tshirt-design">T-Shirt Logos:</label>
+                    <div id="logo-selection1">
+                        <!-- Firebase logos will be loaded here -->
+                    </div>
+                </div>
+                <div class="col-md-5">
                     <div id="tshirt-div">
-                      <div id="tshirt-backgroundpicture">
-                        <img id="tshirt-backgroundpicture1" src="assets/designtoolassets/background_tshirt.png" width=""/>
-                        <img id="tshirt-backgroundpicture2" src="assets/designtoolassets/red.png" width="" style="display: none"/>
-                        <img id="tshirt-backgroundpicture3" src="assets/designtoolassets/blue.png" width="" style="display: none;"/>
-                        <img id="tshirt-backgroundpicture4" src="assets/designtoolassets/green.png" width="" style="display: none;"/>
-                      </div>
+                        <div id="tshirt-backgroundpicture">
+                            <img id="tshirt-backgroundpicture1" src="assets/designtoolassets/background_tshirt.png" width=""/>
+                            <img id="tshirt-backgroundpicture2" src="assets/designtoolassets/red.png" width="" style="display: none"/>
+                            <img id="tshirt-backgroundpicture3" src="assets/designtoolassets/blue.png" width="" style="display: none;"/>
+                            <img id="tshirt-backgroundpicture4" src="assets/designtoolassets/green.png" width="" style="display: none;"/>
+                        </div>
                         <div>
-                          <center>
-                            <button type="button" class="btn btn-dark" onclick="changeBackground(1)">Black</button>
-                            <button type="button" class="btn btn-danger" onclick="changeBackground(2)">Red</button>
-                            <button type="button" class="btn btn-primary" onclick="changeBackground(3)">Blue</button>
-                            <button type="button" class="btn btn-success" onclick="changeBackground(4)">Green</button>
-                          </center>
+                            <center>
+                                <button type="button" class="btn btn-dark" onclick="changeBackground(1)">Black</button>
+                                <button type="button" class="btn btn-danger" onclick="changeBackground(2)">Red</button>
+                                <button type="button" class="btn btn-primary" onclick="changeBackground(3)">Blue</button>
+                                <button type="button" class="btn btn-success" onclick="changeBackground(4)">Green</button>
+                            </center>
                         </div>
                         <div id="drawingArea" class="drawing-area">
                             <div class="canvas-container">
                                 <canvas id="tshirt-canvas" width="250" height="400"></canvas>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
-                <div class="col-md-4" style="padding: 2% 8%">
-                    <!-- The logo selection cards -->
-                    <label for="tshirt-design">T-Shirt Logos:</label>
-                    <div id="logo-selection">
+                <div class="col-md-3" style="padding: 2% 8%">
+                    <label for="tshirt-text">T-Shirt Text:</label>
+                    <div id="logo-selection2">
                         <!-- Firebase logos will be loaded here -->
                     </div>
-                    <button type="button" id="logo" class="btn btn-primary">Load Logos</button>
-                    <br><br>
-                    <label for="tshirt-text">T-Shirt Text:</label>
-                    <button type="button" id="tshirt-text" onclick="fun()" style="border: 1px solid black; border-radius: 3px;">Add Text</button>
-                    <br><br>
+                    <!-- <button type="button" id="tshirt-text" onclick="fun()" style="border: 1px solid black; border-radius: 3px;">Add Text</button> -->
+                    <!-- <br><br>
                     <label for="tshirt-custompicture">Upload Your Own Design:</label>
-                    <input type="file" id="tshirt-custompicture"/>
+                    <input type="file" id="tshirt-custompicture"/> -->
                 </div>
                 <div class="col-md-4" style="padding: 2% 1% 2% 0%">
                     <form class="row g-3">
@@ -122,13 +127,10 @@
                             <center>
                                 <button type="button" class="btn btn-primary">Preview</button>
                                 <button type="submit" class="btn btn-primary">Proceed</button>
-                                <!-- <center>
-                                  <button type="button" class="btn btn-warning" onclick="changeColor('white')">White</button>
-                                  <button type="button" class="btn btn-danger" onclick="changeColor('red')">Red</button>
-                                  <button type="button" class="btn btn-primary" onclick="changeColor('blue')">Blue</button>
-                                  <button type="button" class="btn btn-success" onclick="changeColor('green')">Green</button>
-                                </center> -->
+                                <button type="button" class="btn btn-danger" onclick="deleteObject()">Delete Selected</button>                  
                             </center>
+                            <div id="screenshotResult"></div>
+
                         </div>
                     </form>
                 </div>
@@ -138,15 +140,55 @@
 </div>
 
 <!-- Include Fabric.js in the page -->
-<script src="js/fabric.min.js"></script>
-<script src="js/design-fetch.js" type="module"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+<script src="js/designtool/design-fetch.js" type="module"></script>
+
+
+
+
 
 <!-- Firebase JS SDK -->
 <script>
-   
-
     var canvas = new fabric.Canvas('tshirt-canvas');
 
+    // Function to delete selected object
+    function deleteObject() {
+        var activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            canvas.remove(activeObject);
+        }
+    }
+
+    // Function to add a delete button to selected objects
+function addDeleteButton(obj) {
+    var deleteIcon = new fabric.Text('x', {
+        left: obj.left + obj.width / 2,
+        top: obj.top - obj.height / 2,
+        fontSize: 20,
+        originX: 'center',
+        originY: 'center',
+        fill: 'white',
+        fontWeight: 'bold',
+        selectable: false,
+        hasControls: false,
+        hasBorders: false,
+        backgroundColor: 'red',
+        padding: 5,
+        borderRadius: 15,
+        cursor: 'pointer'
+    });
+
+    deleteIcon.on('mousedown', function() {
+        canvas.remove(obj);
+        canvas.remove(deleteIcon);
+    });
+
+    canvas.add(deleteIcon);
+}
+
+
+
+    // Update T-shirt image function (example)
     function updateTshirtImage(imageURL) {
         fabric.Image.fromURL(imageURL, function(img) {
             img.scaleToHeight(300);
@@ -157,39 +199,23 @@
         });
     }
 
-    document.getElementById("tshirt-custompicture").addEventListener("change", function(e) {
-        var reader = new FileReader();
-        reader.onload = function(event) {
-            var imgObj = new Image();
-            imgObj.src = event.target.result;
-            imgObj.onload = function() {
-                var img = new fabric.Image(imgObj);
-                img.scaleToHeight(300);
-                img.scaleToWidth(300);
-                canvas.centerObject(img);
-                canvas.add(img);
-                canvas.renderAll();
-            };
-        };
-        reader.readAsDataURL(e.target.files[0]);
-    });
-
-    function fun() {
-        var text = prompt("Enter text:");
-        var textSample = new fabric.Text(text, {
-            left: fabric.util.getRandomInt(0, 200),
-            top: fabric.util.getRandomInt(0, 400),
-            fontFamily: 'helvetica',
-            angle: 0,
-            fill: '#000000',
-            scaleX: 0.5,
-            scaleY: 0.5,
-            fontWeight: '',
-            hasRotatingPoint: true
-        });
-        canvas.add(textSample);
-        canvas.item(canvas.item.length-1).hasRotatingPoint = true;
-    }
+    // Example function to add text - Uncomment if needed
+    // function fun() {
+    //     var text = prompt("Enter text:");
+    //     var textSample = new fabric.Text(text, {
+    //         left: fabric.util.getRandomInt(0, 200),
+    //         top: fabric.util.getRandomInt(0, 400),
+    //         fontFamily: 'helvetica',
+    //         angle: 0,
+    //         fill: '#000000',
+    //         scaleX: 0.5,
+    //         scaleY: 0.5,
+    //         fontWeight: '',
+    //         hasRotatingPoint: true
+    //     });
+    //     canvas.add(textSample);
+    //     canvas.item(canvas.item.length-1).hasRotatingPoint = true;
+    // }
 
     function changeBackground(id) {
         document.getElementById('tshirt-backgroundpicture1').style.display = (id === 1) ? 'block' : 'none';
@@ -198,6 +224,12 @@
         document.getElementById('tshirt-backgroundpicture4').style.display = (id === 4) ? 'block' : 'none';
     }
 </script>
+
+
+
+
+
+
 
 </body>
 </html>
