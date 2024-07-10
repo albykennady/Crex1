@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="css/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <video autoplay muted  id="myVideo">
+        <source src="assets/loginassets/experion.mp4" type="video/mp4">
+    </video>
+    <div class="container">
+        <div class="overlay">
+            <div class="login-box">
+                <img style="width: 25%; position: relative; bottom: 140px;" src="assets/loginassets/crexx.png" alt="">
+                <h2 style="color: white; position: relative; bottom: 130px;">Register Now</h2>
+                <div id="register-form">
+                    <div class="textbox">
+                        <input type="text" id="register-username" placeholder="Username" required>
+                    </div>
+                    <div class="textbox">
+                        <input type="email" id="register-email" placeholder="Email" required>
+                    </div>
+                    <div class="textbox">
+                        <input type="password" id="register-password" placeholder="Password" required>
+                    </div>
+                    <button id="register-button">Register</button>
+                    <p>Already have an account? <a href="login.html" id="show-login" class="forgot-password">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>
