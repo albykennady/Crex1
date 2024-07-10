@@ -44,8 +44,47 @@
 .logo-card:hover {
     transform: scale(1.1);
 }
+.logo-card {
+    margin: 5px;
+    cursor: pointer;
+}
+
+#logo-selection1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#logo-selection1 .logo-card {
+    flex: 1 1 calc(50% - 10px); /* 2 logos per row with 10px gap */
+    background-color: #ddd;
+}
+
+#logo-selection1 img {
+    width: 100%;
+    height: auto;
+}
+#logo-selection2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#logo-selection2 .logo-card {
+    flex: 1 1 calc(50% - 10px); /* 2 logos per row with 10px gap */
+    background-color: #ddd;
+    
+}
+
+#logo-selection2 img {
+    width: 200%;
+    height: auto;
+}
+
 
 .image-container {
     display: inline-block;
     margin: 10px;
+    
+
 }
