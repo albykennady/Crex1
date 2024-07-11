@@ -5,32 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="css/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <video autoplay muted  id="myVideo">
         <source src="assets/loginassets/experion.mp4" type="video/mp4">
-      </video>
+    </video>
     <div class="container">
-        <!-- <img style="width: 50%; margin-right: 900px;" src="login-assets/Ellipse 2.png" alt=""> -->
         <div class="overlay">
-            
             <div class="login-box">
                 <img style="width: 25%; position: relative; bottom: 140px;" src="assets/loginassets/crexx.png" alt="">
-                <h2 style="color: white; position: relative; bottom: 130px; ">Login</h2>
-                <form>
+                <h2 style="color: white; position: relative; bottom: 130px;">Login</h2>
+                <div id="login-form">
                     <div class="textbox">
-                        <input type="email" placeholder="Email" required>
+                        <input type="text" id="login-username" placeholder="Username" required>
                     </div>
                     <div class="textbox">
-                        <input type="password" placeholder="Password" required>
+                        <input type="password" id="login-password" placeholder="Password" required>
                     </div>
-                    
-                    <button type="submit">Sign In</button>
-                    <a href="#" class="forgot-password">Forgot password?</a>
-                    <a href="register.html" class="forgot-password">New User?</a>
-                </form>
+                    <button id="login-button">Sign In</button>
+                    <p>Don't have an account? <a href="register.html" class="forgot-password" id="show-register">Register</a></p>
+                    <p><a href="#" class="forgot-password" id="forgot-password">Forgot Password?</a></p>
+                </div>
             </div>
         </div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/login.js"></script>
 </body>
 </html>
