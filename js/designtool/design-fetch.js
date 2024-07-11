@@ -1,78 +1,73 @@
-// Firebase configuration
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-import { getStorage, ref, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDczLLPnaREY3SahAMeKJ-DOMyVENmWwLk",
-    authDomain: "crex-f9f68.firebaseapp.com",
-    projectId: "crex-f9f68",
-    storageBucket: "crex-f9f68.appspot.com",
-    messagingSenderId: "209664661907",
-    appId: "1:209664661907:web:933435dab65ebb20913066"
+    apiKey: "AIzaSyCDYlCSgksz5aGrRd57He-yfuo8zzcog_I",
+    authDomain: "product-40143.firebaseapp.com",
+    databaseURL: "https://product-40143-default-rtdb.firebaseio.com",
+    projectId: "product-40143",
+    storageBucket: "product-40143.appspot.com",
+    messagingSenderId: "397255272673",
+    appId: "1:397255272673:web:829df4d68ea98cc7eb2fa0",
+    measurementId: "G-566VGYNG2K"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const storage = getStorage(app);
+ 
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-window.addEventListener('load', function() {
-    const logosRef1 = ref(storage, 'images/logos/');
-
-    // Fetch the list of logo files
-    listAll(logosRef1).then((result) => {
-        result.items.forEach((imageRef) => {
-            getDownloadURL(imageRef).then((url) => {
-                // Create a card element for each logo
-                const logoCard = document.createElement("div");
-                logoCard.classList.add("logo-card");
-                const logoImg = document.createElement("img");
-                logoImg.src = url;
-                logoCard.appendChild(logoImg);
-
-                // Add click event to the logo card
-                logoCard.addEventListener("click", function() {
-                    updateTshirtImage(url);
-                });
-
-                // Append the logo card to the logo-selection div
-                document.getElementById("logo-selection1").appendChild(logoCard);
-            }).catch((error) => {
-                console.log("Error getting download URL: ", error);
-            });
+ // Function to display images from Firestore
+ async function displayImagesFromFirestore() {
+    imageContainer.innerHTML = '';
+    try {
+      const querySnapshot = await getDocs(collection(db, 'images'));
+      querySnapshot.forEach((doc) => {
+        const logoCard = document.createElement('div');
+        logoCard.classList.add('logo-card');
+        const imgElement = document.createElement('img');
+        imgElement.src = doc.data().dataUrl;
+        imgElement.className = 'img-thumbnail';
+        logoCard.appendChild(imgElement);
+  
+        // Define the url variable
+        const url = doc.data().dataUrl;
+  
+        // Add click event to the logo card
+        logoCard.addEventListener('click', function () {
+          updateTshirtImage(url);
         });
-    }).catch((error) => {
-        console.log("Error listing logos: ", error);
+        
+  
+        // Append the logo card to the logo-selection div
+        document.getElementById('logo-selection1').appendChild(logoCard);
+      });
+    } catch (error) {
+      console.error('Error getting images:', error);
+    }
+  }
+
+  displayImagesFromFirestore();
+
+document.getElementById('screenshotButton').addEventListener('click', function(event) {
+    event.preventDefault();
+  
+    html2canvas(document.getElementById('tshirt-div'), {
+      useCORS: true, // Enable CORS if capturing cross-origin content
+      logging: true // Enable logging for debugging
+    }).then(function(canvas) {
+      // Get the image data URL from the canvas
+      const imageDataURL = canvas.toDataURL();
+  
+      // Create a link to download the image
+      const link = document.createElement('a');
+      link.href = imageDataURL;
+      link.download = 'tshirt-design.png';
+      link.click();
+  
+      // Remove the link from the DOM
+      link.remove();
+    }).catch(function(error) {
+      console.error('Error capturing screenshot:', error);
     });
-});
-
-window.addEventListener('load', function() {
-    const logosRef2 = ref(storage, 'images/text/');
-
-    // Fetch the list of logo files
-    listAll(logosRef2).then((result) => {
-        result.items.forEach((imageRef) => {
-            getDownloadURL(imageRef).then((url) => {
-                // Create a card element for each logo
-                const logoCard = document.createElement("div");
-                logoCard.classList.add("logo-card");
-                const logoImg = document.createElement("img");
-                logoImg.src = url;
-                logoCard.appendChild(logoImg);
-
-                // Add click event to the logo card
-                logoCard.addEventListener("click", function() {
-                    updateTshirtImage(url);
-                });
-
-                // Append the logo card to the logo-selection div
-                document.getElementById("logo-selection2").appendChild(logoCard);
-            }).catch((error) => {
-                console.log("Error getting download URL: ", error);
-            });
-        });
-    }).catch((error) => {
-        console.log("Error listing logos: ", error);
-    });
-});
+  });
