@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="css/designtool.css">
     <title>XFinityMedia</title>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
     
 
@@ -49,6 +49,9 @@
                     <div id="logo-selection1">
                         <!-- Firebase logos will be loaded here -->
                     </div>
+                    <div class="row" id="imageContainer">
+                        <!-- Images will be displayed here -->
+                      </div>
                 </div>
                 <div class="col-md-5">
                     <div id="tshirt-div">
@@ -73,55 +76,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3" style="padding: 2% 8%">
-                    <label for="tshirt-text">T-Shirt Text:</label>
-                    <div id="logo-selection2">
-                        <!-- Firebase logos will be loaded here -->
-                    </div>
-                    <!-- <button type="button" id="tshirt-text" onclick="fun()" style="border: 1px solid black; border-radius: 3px;">Add Text</button> -->
-                    <!-- <br><br>
-                    <label for="tshirt-custompicture">Upload Your Own Design:</label>
-                    <input type="file" id="tshirt-custompicture"/> -->
-                </div>
+                
                 <div class="col-md-4" style="padding: 2% 1% 2% 0%">
                     <form class="row g-3">
-                        <div class="col-md-6">
-                            <p style="text-align: center;">Size</p>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                                <label class="form-check-label" for="flexCheckDefault1">
-                                    S
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                                <label class="form-check-label" for="flexCheckDefault2">
-                                    M
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
-                                <label class="form-check-label" for="flexCheckDefault3">
-                                    L
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
-                                <label class="form-check-label" for="flexCheckDefault4">
-                                    XL
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5">
-                                <label class="form-check-label" for="flexCheckDefault5">
-                                    XXL
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <p style="text-align: center;">Quantity</p>
-                            <input type="number" class="form-control" id="inputPassword4" placeholder="Enter the Quantity">
-                        </div>
+                        
                         <div class="col-12">
                             <br>
                             <center>
@@ -133,6 +91,7 @@
 
                         </div>
                     </form>
+                    <button id="screenshotButton" class="btn btn-primary" type="button">Take Screenshot</button>
                 </div>
             </div>
         </div>
@@ -142,13 +101,12 @@
 <!-- Include Fabric.js in the page -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
 <script src="js/designtool/design-fetch.js" type="module"></script>
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.3/dist/html2canvas.min.js"></script>
 
 
 <!-- Firebase JS SDK -->
 <script>
+    
     var canvas = new fabric.Canvas('tshirt-canvas');
 
     // Function to delete selected object
@@ -185,9 +143,6 @@ function addDeleteButton(obj) {
 
     canvas.add(deleteIcon);
 }
-
-
-
     // Update T-shirt image function (example)
     function updateTshirtImage(imageURL) {
         fabric.Image.fromURL(imageURL, function(img) {
@@ -196,26 +151,11 @@ function addDeleteButton(obj) {
             canvas.centerObject(img);
             canvas.add(img);
             canvas.renderAll();
+            
+            // Add delete button on image select
+            addDeleteButton(img.left + img.width / 2, img.top - img.height / 2);
         });
     }
-
-    // Example function to add text - Uncomment if needed
-    // function fun() {
-    //     var text = prompt("Enter text:");
-    //     var textSample = new fabric.Text(text, {
-    //         left: fabric.util.getRandomInt(0, 200),
-    //         top: fabric.util.getRandomInt(0, 400),
-    //         fontFamily: 'helvetica',
-    //         angle: 0,
-    //         fill: '#000000',
-    //         scaleX: 0.5,
-    //         scaleY: 0.5,
-    //         fontWeight: '',
-    //         hasRotatingPoint: true
-    //     });
-    //     canvas.add(textSample);
-    //     canvas.item(canvas.item.length-1).hasRotatingPoint = true;
-    // }
 
     function changeBackground(id) {
         document.getElementById('tshirt-backgroundpicture1').style.display = (id === 1) ? 'block' : 'none';
@@ -224,12 +164,26 @@ function addDeleteButton(obj) {
         document.getElementById('tshirt-backgroundpicture4').style.display = (id === 4) ? 'block' : 'none';
     }
 </script>
+<script>
+    document.getElementById('screenshotButton').addEventListener('click', function(event) {
+            event.preventDefault();
 
+            html2canvas(document.getElementById('tshirt-div'), {
+                useCORS: true, // Enable CORS if capturing cross-origin content
+                logging: true // Enable logging for debugging
+            }).then(function(canvas) {
+                // Handle successful capture
+                var img = new Image();
+                img.src = canvas.toDataURL(); // Get image data URL from the canvas
+                document.getElementById('screenshotResult').innerHTML = ''; // Clear previous results
+                document.getElementById('screenshotResult').appendChild(img); // Display captured image
+            }).catch(function(error) {
+                // Handle errors
+                console.error('Error capturing screenshot:', error);
+            });
+        });
 
-
-
-
-
+</script>
 
 </body>
 </html>
