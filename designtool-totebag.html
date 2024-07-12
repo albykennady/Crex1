@@ -33,7 +33,7 @@
                 <div class="col-md-3">
                     <!-- The logo selection cards -->
                     <label for="totebag-design">ToteBag Logos:</label>
-                    <div id="logo-selection1">
+                    <div id="logo-selection">
                         <!-- Firebase logos will be loaded here -->
                     </div>
                     <div class="row" id="imageContainer">
@@ -57,25 +57,19 @@
                     </div>
                 </div>
                
-                <div class="col-md-3" style="padding: 2% 8%">
-                    <form class="row g-3">
-                        <div>
-                            <center>
-                                <button type="button" class="btn btn-dark" onclick="changeTotebagColor(1)">Black</button>
-                                <button type="button" class="btn btn-light" onclick="changeTotebagColor(2)">White</button>
+                <div class="col-md-3" >
+                    <div class="control-panel">
+                        <img src="assets/designtoolassets/bin.png" class="delete-icon" onclick="deleteObject()" width="40px" height="40px">  
+                        <div  class="color-buttons">
+                            
+                                <button type="button" class="btn btn-black button-design" onclick="changeTotebagColor(1)">Black</button>
+                                <button type="button" class="btn btn-white button-design" onclick="changeTotebagColor(2)">White</button>
                              
                                 
-                            </center>
-                        </div>
-                        <div class="col-12">
-                            <br>
-                            <center>
-                                <button type="button" class="btn btn-primary" id="Addtocart">Proceed</button>
-                                <button type="button" class="btn btn-danger" onclick="deleteObject()">Delete Selected</button>                  
-                            </center>
                             
                         </div>
-                    </form>
+                        <button type="button" class="add-to-cart" id="Addtocart">Add to Cart</button>
+                    </div>
                 </div>
                 
             </div>
@@ -147,28 +141,7 @@ function addDeleteButton(obj) {
     
 }
 
-document.getElementById('screenshotButton').addEventListener('click', function(event) {
-    event.preventDefault();
-  
-    html2canvas(document.getElementById('totebag-div'), {
-      useCORS: true, // Enable CORS if capturing cross-origin content
-      logging: true // Enable logging for debugging
-    }).then(function(canvas) {
-      // Get the image data URL from the canvas
-      const imageDataURL = canvas.toDataURL();
-  
-      // Create a link to download the image
-      const link = document.createElement('a');
-      link.href = imageDataURL;
-      link.download = 'totebag-design.png';
-      link.click();
-  
-      // Remove the link from the DOM
-      link.remove();
-    }).catch(function(error) {
-      console.error('Error capturing screenshot:', error);
-    });
-  });
+
 </script>
 
 

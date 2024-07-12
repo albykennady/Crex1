@@ -40,7 +40,7 @@ const firebaseConfig = {
         
   
         // Append the logo card to the logo-selection div
-        document.getElementById('logo-selection1').appendChild(logoCard);
+        document.getElementById('logo-selection').appendChild(logoCard);
       });
     } catch (error) {
       console.error('Error getting images:', error);
