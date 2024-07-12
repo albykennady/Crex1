@@ -37,10 +37,10 @@ proceedButton.addEventListener('click', async function(event) {
  
       // Generate a unique filename using a random ID
       const randomId = Math.floor(Math.random() * 1000000000).toString();
-      const fileName = `tshirtdesign${randomId}`;
+      const fileName = `hoodiedesign${randomId}`;
  
       // Create a new Firebase Storage reference for the T-shirt design
-      const storageRefTshirt = ref(storage, `CartFolder/Tshirt/${fileName}.png`);
+      const storageRefTshirt = ref(storage, `CartFolder/Hoodie/${fileName}.png`);
      
       const uploadTaskTshirt = uploadBytesResumable(storageRefTshirt, blob);
       uploadTaskTshirt.on('state_changed',

@@ -145,3 +145,81 @@
     width: 100px;
     height: 100px;
 }
+
+
+/** Raincoat designing */ 
+
+#raincoat-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+}
+
+#raincoat-div {
+    width: 550px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.raincoat-drawing-area {
+    position: absolute;
+    top: 150px;
+    left: 170px;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}
+
+
+/** Jacket designing */ 
+
+#jacket-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+}
+
+#jacket-div {
+    width: 550px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.jacket-drawing-area {
+    position: absolute;
+    top: 110px;
+    left: 170px;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}
+
+
+/** Cap designing */ 
+
+#cap-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+}
+
+#cap-div {
+    width: 550px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.cap-drawing-area {
+    position: absolute;
+    top: 160px;
+    left: 170px;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}
