@@ -43,7 +43,7 @@ function listAllImages() {
 }
  
 async function checkIfImageExists(imageName, itemRef) {
-  const productFolders = ['Tshirt', 'Hoodie', 'Totebag', 'Raincoat', 'Jacket', 'Mug', 'Cap'];
+  const productFolders = ['Tshirt', 'Hoodie', 'Totebag', 'Raincoat', 'Jacket', 'Sweater', 'Cap'];
   let productType = '';
   let unitPrice = null;
  

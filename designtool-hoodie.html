@@ -43,19 +43,14 @@
                 <div class="col-md-5">
                     <div id="hoodie-div">
                         <div id="hoodie-backgroundpicture">
-                            <img id="hoodie-backgroundpicture1" src="assets/designtoolassets/hoodieBlack.png" width=""/>
-                            <img id="hoodie-backgroundpicture2" src="assets/designtoolassets/hodieeWhite.png" width="" style="display: none"/>
+                            <img id="hoodie-backgroundpicture1" src="assets/designtoolassets/hoodieblack.png" width=""/>
+                            <img id="hoodie-backgroundpicture2" src="assets/designtoolassets/hoodiegrey.png" width="" style="display: none"/>
                             <img id="hoodie-backgroundpicture3" src="assets/designtoolassets/hoodieblue.png" width="" style="display: none;"/>
                         </div>
-                        <!-- <div id="hoodie-backgroundpicture">
-                            <img id="hoodie-image-black" src="assets/designtoolassets/hoodieBlack.png" style="display: block;" />
-                            <img id="hoodie-image-white" src="assets/designtoolassets/hodieeWhite.png" style="display: none;" />
-                            <img id="hoodie-image-blue" src="assets/designtoolassets/hoodieblue.png" style="display: none;" />
-                        </div> -->
                         
                         <div id="drawingArea" class="hoodie-drawing-area">
                             <div class="canvas-container-hoodie">
-                                <canvas id="hoodie-canvas" width="350" height="330"></canvas>
+                                <canvas id="hoodie-canvas" width="260" height="270"></canvas>
                             </div>
                         </div>
                     </div>
@@ -65,18 +60,18 @@
                 </div>
                 <div class="col-md-3" style="padding: 2% 8%">
                     <form class="row g-3">
+                        <div>
                         <center>
                             <button type="button" class="btn btn-dark" onclick="changeHoodieColor(1)">Black</button>
                             <button type="button" class="btn btn-danger" onclick="changeHoodieColor(2)">White</button>
                             <button type="button" class="btn btn-primary" onclick="changeHoodieColor(3)">Blue</button>
                             
                         </center>
+                    </div>
                         <div class="col-12">
                             <br>
                             <center>
-                                <button type="button" class="btn btn-primary">Preview</button>
                                 <button type="button" class="btn btn-primary" id="Addtocart">Proceed</button>
-                                <button id="screenshotButton" class="btn btn-primary" type="button">Take Screenshot</button>
                                 <button type="button" class="btn btn-danger" onclick="deleteObject()">Delete Selected</button>                  
                             </center>
                             

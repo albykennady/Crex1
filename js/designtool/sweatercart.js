@@ -24,7 +24,7 @@ proceedButton.addEventListener('click', async function(event) {
     event.preventDefault();
  
     // Get the div element
-    const div = document.getElementById('cap-div');
+    const div = document.getElementById('sweater-div');
  
     // Capture the div as an image using html2canvas
     html2canvas(div).then(async function(canvas) {
@@ -37,10 +37,10 @@ proceedButton.addEventListener('click', async function(event) {
  
       // Generate a unique filename using a random ID
       const randomId = Math.floor(Math.random() * 1000000000).toString();
-      const fileName = `capdesign${randomId}`;
+      const fileName = `sweaterdesign${randomId}`;
  
       // Create a new Firebase Storage reference for the T-shirt design
-      const storageRefTshirt = ref(storage, `CartFolder/Cap/${fileName}.png`);
+      const storageRefTshirt = ref(storage, `CartFolder/Sweater/${fileName}.png`);
      
       const uploadTaskTshirt = uploadBytesResumable(storageRefTshirt, blob);
       uploadTaskTshirt.on('state_changed',
@@ -59,6 +59,8 @@ proceedButton.addEventListener('click', async function(event) {
           });
         }
       );
+ 
+
 //Create a new firebase storage refenerence for the username design
 const storageRefUser = ref(storage, `Users/${username}/${fileName}.png`);
       
@@ -79,8 +81,6 @@ uploadTaskUser.on('state_changed',
     });
   }
 );
-      
-
 
 
 
