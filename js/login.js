@@ -28,7 +28,7 @@ loginButton.addEventListener('click', (event) => {
               title: 'User Logged in',
               confirmButtonText: 'OK'
             }).then(() => {
-              window.location.href = 'cart.html'; // Redirect to home page
+              window.location.href = 'homepage.html'; // Redirect to home page
             });
           })
           .catch(error => {
