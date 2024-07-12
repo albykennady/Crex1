@@ -43,7 +43,7 @@ function listAllImages() {
 }
 
 async function checkIfImageExists(imageName, itemRef) {
-  const productFolders = ['Tshirt', 'Hoodie', 'Totebag', 'Raincoat', 'Jacket', 'Mug', 'Cap'];
+  const productFolders = ['Tshirt', 'Hoodie', 'Totebag', 'Raincoat', 'Jacket', 'Sweater', 'Cap'];
   let productType = '';
   let unitPrice = null;
 
@@ -246,7 +246,6 @@ function collectOrderDetails() {
       });
   }
   
-  // Function to handle the checkout process
  // Function to handle the checkout process
 function checkout() {
   const { orderItems, quantity } = collectOrderDetails();
