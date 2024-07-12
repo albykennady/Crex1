@@ -88,3 +88,60 @@
     
 
 }
+
+
+/* Hoodie designing */
+#hoodie-backgroundpicture{
+    position: relative;
+}
+#hoodie-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+}
+
+#hoodie-div {
+    width: 550px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.hoodie-drawing-area {
+    position: absolute;
+    top: 110px;
+    left: 122px;
+    z-index: 10;
+    width: 200px;
+    height: 400px;
+}
+.hide {
+    display: none;
+}
+
+
+/** Totebag designing */ 
+
+#totebag-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 600px;
+}
+
+#totebag-div {
+    width: 550px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.totebag-drawing-area {
+    position: absolute;
+    top: 270px;
+    left: 170px;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}

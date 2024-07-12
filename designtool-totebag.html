@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/designtool.css">
+    <title>DesignTool-Totebag</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+    
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Design Tool</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+       
+    </div>
+</nav>
+<div class="container" style="padding: 20px 5px;">
+    <div class="card mb-3" style="max-width: auto;">
+        <div class="card-body">
+            <center><h4 class="card-title">Custom Totebag Design Tool</h4></center><br>
+            <div class="row" style="padding: 10px 0px;">
+                <div class="col-md-3">
+                    <!-- The logo selection cards -->
+                    <label for="totebag-design">ToteBag Logos:</label>
+                    <div id="logo-selection1">
+                        <!-- Firebase logos will be loaded here -->
+                    </div>
+                    <div class="row" id="imageContainer">
+                        <!-- Images will be displayed here -->
+                      </div>
+                </div>
+                <div class="col-md-5">
+                    <div id="totebag-div">
+                       
+                        <div id="totebag-backgroundpicture">
+                            <img id="totebag-backgroundpicture1" src="assets/designtoolassets/totebagBlack.jpg" width=""/>
+                            <img id="totebag-backgroundpicture2" src="assets/designtoolassets/totebagWhite.jpg" width="" style="display: none"/>
+                          
+                        </div>
+                        
+                        <div id="drawingArea" class="totebag-drawing-area">
+                            <div class="canvas-container-totebag">
+                                <canvas id="totebag-canvas" width="260" height="290"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-md-3" style="padding: 2% 8%">
+                    <form class="row g-3">
+                        <div>
+                            <center>
+                                <button type="button" class="btn btn-dark" onclick="changeTotebagColor(1)">Black</button>
+                                <button type="button" class="btn btn-danger" onclick="changeTotebagColor(2)">White</button>
+                             
+                                
+                            </center>
+                        </div>
+                        <div class="col-12">
+                            <br>
+                            <center>
+                                <button type="button" class="btn btn-primary">Preview</button>
+                                <button type="button" class="btn btn-primary" id="Addtocart">Proceed</button>
+                                <button id="screenshotButton" class="btn btn-primary" type="button">Take Screenshot</button>
+                                <button type="button" class="btn btn-danger" onclick="deleteObject()">Delete Selected</button>                  
+                            </center>
+                            
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Fabric.js in the page -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+<script src="js/designtool/design-fetch.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.3/dist/html2canvas.min.js"></script>
+<script src="js/designtool/totebagcart.js"type="module"></script>
+
+<!-- Firebase JS SDK -->
+<script>
+    
+    var canvas = new fabric.Canvas('totebag-canvas');
+
+    // Function to delete selected object
+    function deleteObject() {
+        var activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            canvas.remove(activeObject);
+        }
+    }
+
+    // Function to add a delete button to selected objects
+function addDeleteButton(obj) {
+    var deleteIcon = new fabric.Text('x', {
+        left: obj.left + obj.width / 2,
+        top: obj.top - obj.height / 2,
+        fontSize: 20,
+        originX: 'center',
+        originY: 'center',
+        fill: 'white',
+        fontWeight: 'bold',
+        selectable: false,
+        hasControls: false,
+        hasBorders: false,
+        backgroundColor: 'red',
+        padding: 5,
+        borderRadius: 15,
+        cursor: 'pointer'
+    });
+
+    deleteIcon.on('mousedown', function() {
+        canvas.remove(obj);
+        canvas.remove(deleteIcon);
+    });
+
+    canvas.add(deleteIcon);
+}
+    // Update T-shirt image function (example)
+    function updateTshirtImage(imageURL) {
+        fabric.Image.fromURL(imageURL, function(img) {
+            img.scaleToHeight(300);
+            img.scaleToWidth(300);
+            canvas.centerObject(img);
+            canvas.add(img);
+            canvas.renderAll();
+            
+            // Add delete button on image select
+            addDeleteButton(img.left + img.width / 2, img.top - img.height / 2);
+        });
+    }
+    function changeTotebagColor(id) {
+    document.getElementById('totebag-backgroundpicture1').style.display = (id === 1) ? 'block' : 'none';
+    document.getElementById('totebag-backgroundpicture2').style.display = (id === 2) ? 'block' : 'none';
+    
+}
+
+document.getElementById('screenshotButton').addEventListener('click', function(event) {
+    event.preventDefault();
+  
+    html2canvas(document.getElementById('totebag-div'), {
+      useCORS: true, // Enable CORS if capturing cross-origin content
+      logging: true // Enable logging for debugging
+    }).then(function(canvas) {
+      // Get the image data URL from the canvas
+      const imageDataURL = canvas.toDataURL();
+  
+      // Create a link to download the image
+      const link = document.createElement('a');
+      link.href = imageDataURL;
+      link.download = 'totebag-design.png';
+      link.click();
+  
+      // Remove the link from the DOM
+      link.remove();
+    }).catch(function(error) {
+      console.error('Error capturing screenshot:', error);
+    });
+  });
+</script>
+
+
+</body>
+</html>
