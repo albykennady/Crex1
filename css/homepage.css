@@ -171,6 +171,7 @@ footer span {
     .category-list, .product-list {
         flex-direction: column;
         align-items: center;
+        
     }
 
     .category-item, .product-item {
