@@ -56,6 +56,5 @@ function getImages(username) {
         });
 }
 
-// Replace 'yourUsername' with the actual username you want to use
- const username = 'Rayan'; // Replace this with dynamic username as needed
+
 getImages(username);
