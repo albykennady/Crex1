@@ -20,7 +20,7 @@ const analytics = getAnalytics(app);
 const storage = getStorage(app);
 const database = getDatabase(app);
 
-const username = 'Rayan';
+// const username = 'Rayan';
 
 // Function to list all images
 let displayedImages = {};

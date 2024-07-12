@@ -23,7 +23,6 @@ document.getElementById('submitFeedbackButton').addEventListener('click', submit
 function submitFeedback() {
     const rating = document.querySelector('input[name="rating"]:checked').value;
     const comment = document.getElementById('comment').value;
-    const username = "athira01";
 
     const feedbackRef = dbRef(database, 'crex/feedback/' + username);
 
@@ -35,7 +34,6 @@ function submitFeedback() {
         comment: comment,
         timestamp: new Date().toISOString() // Optional: Add a timestamp for each feedback entry
     }).then(() => {
-        // alert('Feedback submitted successfully!');
         document.querySelector('.feedback').innerHTML = '<div class="thank-you-message"><video autoplay muted width="100% "  controls><source src="assets/cf1.2assets/testy.mp4" type="video/mp4"></video></div>';
     }).catch((error) => {
         console.error('Error submitting feedback:', error);
