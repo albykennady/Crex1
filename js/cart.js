@@ -20,46 +20,56 @@ const analytics = getAnalytics(app);
 const storage = getStorage(app);
 const database = getDatabase(app);
 
+// const username = 'Rayan';
+
 // Function to list all images
+let displayedImages = {};
+
 function listAllImages() {
-  var listRef = ref(storage, "CartFolder/cart/");
+  const listRef = ref(storage, "CartFolder/cart/");
+
   listAll(listRef)
     .then((res) => {
       res.items.forEach((itemRef) => {
-        getDownloadURL(itemRef).then((url) => {
-          checkImageAndFetchPrice(itemRef.name, url);
-        }).catch((error) => {
-          console.error('Error getting download URL:', error);
-        });
+        const imageName = itemRef.name;
+        if (!displayedImages[imageName]) {
+          checkIfImageExists(imageName, itemRef);
+        }
       });
     })
     .catch((error) => {
-      console.error('Error listing images:', error);
+      console.error('Error listing images:', error.message, error.code);
     });
 }
 
-// Call listAllImages on page load
-listAllImages();
+async function checkIfImageExists(imageName, itemRef) {
+  const productFolders = ['Tshirt', 'Hoodie', 'Totebag', 'Raincoat', 'Jacket', 'Sweater', 'Cap'];
+  let productType = '';
+  let unitPrice = null;
 
-// Function to check if an image exists in the 'bottle' folder
-async function checkIfImageExistsInBottle(imageFileName) {
-  try {
-    const imageRef = ref(storage, 'CartFolder/Bottle/' + imageFileName);
-    await getDownloadURL(imageRef); // This will throw an error if the image does not exist
-    return true;
-  } catch (error) {
-    return false;
+  for (const folder of productFolders) {
+    try {
+      const productRef = ref(storage, `CartFolder/${folder}/${imageName}`);
+      await getDownloadURL(productRef);
+      productType = folder;
+      unitPrice = await fetchPrice(folder.toLowerCase());
+      break;
+    } catch (error) {
+      // Ignore error if image does not exist in the folder
+    }
   }
-}
 
-// Function to check if an image exists in the 'tshirt' folder
-async function checkIfImageExistsInTshirt(imageFileName) {
-  try {
-    const imageRef = ref(storage, 'CartFolder/Tshirt/' + imageFileName);
-    await getDownloadURL(imageRef); // This will throw an error if the image does not exist
-    return true;
-  } catch (error) {
-    return false;
+  if (unitPrice) {
+    getDownloadURL(itemRef)
+      .then((url) => {
+        displayImage(url, imageName, unitPrice, productType);
+        displayedImages[imageName] = true;
+      })
+      .catch((error) => {
+        console.error('Error getting download URL:', error.message, error.code);
+      });
+  } else {
+    console.log(`Price not found for ${imageName}`);
   }
 }
 
@@ -77,35 +87,6 @@ function fetchPrice(productType) {
       reject(error);
     });
   });
-}
-
-// Function to check if the image exists in 'bottle' or 'tshirt' and fetch the price
-async function checkImageAndFetchPrice(imageName, imageUrl) {
-  try {
-    let unitPrice = null;
-    let productType = '';
-
-    const existsInBottle = await checkIfImageExistsInBottle(imageName);
-    if (existsInBottle) {
-      unitPrice = await fetchPrice('bottle');
-      productType = 'Bottle';
-    } else {
-      const existsInTshirt = await checkIfImageExistsInTshirt(imageName);
-      if (existsInTshirt) {
-        unitPrice = await fetchPrice('tshirt');
-        productType = 'Tshirt';
-      }
-    }
-
-    if (unitPrice) {
-      displayImage(imageUrl, imageName, unitPrice, productType); // Pass productType to displayImage function
-      updateQuantity(imageName, 0, unitPrice); // Update quantity to 1 and recalculate price and grand total
-    } else {
-      console.log(`Price not found for ${imageName}`);
-    }
-  } catch (error) {
-    console.error('Error fetching price:', error);
-  }
 }
 
 // Function to update quantity and recalculate price and grand total
@@ -133,7 +114,7 @@ function removeItem(row, imageName, itemTotal) {
     row.remove();
     calculateGrandTotal(); // Recalculate grand total after removing the item
   }).catch((error) => {
-    console.error(`Error deleting image '${imageName}':`, error);
+    console.error(`Error deleting image '${imageName}':`, error.message, error.code);
   });
 }
 
@@ -144,10 +125,10 @@ function displayImage(url, name, unitPrice, productType) {
   const row = tableBody.insertRow();
 
   const cellImage = row.insertCell(0);
-  const cellProduct = row.insertCell(1); // New cell for product type
+  const cellProduct = row.insertCell(1);
   const cellQuantity = row.insertCell(2);
   const cellPrice = row.insertCell(3);
-  const cellButton = row.insertCell(4); // New cell for button
+  const cellButton = row.insertCell(4);
 
   const img = document.createElement("img");
   img.src = url;
@@ -156,7 +137,7 @@ function displayImage(url, name, unitPrice, productType) {
   img.width = 100; // Adjust size as needed
   cellImage.appendChild(img);
   cellProduct.className = "product-name"; 
-  cellProduct.innerHTML = productType; // Set product type
+  cellProduct.innerHTML = productType;
 
   const quantityContainer = document.createElement('div');
   const minusButton = document.createElement('button');
@@ -180,7 +161,7 @@ function displayImage(url, name, unitPrice, productType) {
   cellPrice.className = "price";
   cellPrice.innerHTML = `$${(unitPrice * 1).toFixed(2)}`; // Display price for 1 quantity
 
-  const removeButton = document.createElement('button'); // New remove button
+  const removeButton = document.createElement('button');
   removeButton.innerHTML = 'Remove';
   removeButton.className = "remove-btn";
   removeButton.addEventListener('click', () => removeItem(row, name, unitPrice * parseInt(quantityDisplay.innerHTML)));
@@ -265,47 +246,60 @@ function collectOrderDetails() {
       });
   }
   
-  // Function to handle the checkout process
-  function checkout() {
-    const username = 'testUser'; // Replace with actual username
-    const { orderItems, quantity } = collectOrderDetails();
-    const orderDate = new Date().toISOString();
-  
-    // Add order details to the database
-    addOrderToDatabase(username, orderItems, quantity, orderDate);
-  
-    // Display order successful message
-    alert('Order successful!');
-  
-    // Clear the cart folder in Firebase Storage
-    clearCartFromFirebase();
-  
-    // Clear the cart table in the UI
-    const tableBody = document.getElementById('cart-table').getElementsByTagName('tbody')[0];
-    tableBody.innerHTML = ''; // Clearing all rows
-    document.getElementById('grand-total').innerHTML = `Grand Total: $0.00`;
-  }
-  
-  // Function to clear the cart folder in Firebase Storage
-  function clearCartFromFirebase() {
-    const cartRef = ref(storage, 'CartFolder/cart/');
-  
-    listAll(cartRef).then((res) => {
-      res.items.forEach((itemRef) => {
-        deleteObject(itemRef).then(() => {
-          console.log(`Deleted ${itemRef.fullPath} successfully.`);
-        }).catch((error) => {
-          console.error(`Error deleting ${itemRef.fullPath}:`, error);
-        });
-      });
-    }).catch((error) => {
-      console.error("Error listing items in 'cart' folder:", error);
-    });
-  }
-  
-  document.getElementById('checkoutBtn').addEventListener('click', () => {
-    checkout();
-  });
-  
+ // Function to handle the checkout process
+function checkout() {
+  const { orderItems, quantity } = collectOrderDetails();
+  const orderDate = new Date().toISOString();
 
- 
+  // Add order details to the database
+  addOrderToDatabase(username, orderItems, quantity, orderDate);
+
+  // Clear the cart folder in Firebase Storage
+  clearCartFromFirebase()
+    .then(() => {
+      // Clear the cart table in the UI
+      const tableBody = document.getElementById('cart-table').getElementsByTagName('tbody')[0];
+      tableBody.innerHTML = ''; // Clearing all rows
+
+      // Update the grand total in the UI
+      document.getElementById('grand-total').innerHTML = `Grand Total: $0.00`;
+
+      // Redirect to feedback.html
+      window.location.href = 'feedback.html';
+    })
+    .catch((error) => {
+      console.error('Error clearing cart from Firebase:', error);
+    });
+}
+
+// Function to clear the cart folder in Firebase Storage
+function clearCartFromFirebase() {
+  return new Promise((resolve, reject) => {
+    const cartRef = ref(storage, 'CartFolder/cart/');
+    listAll(cartRef)
+      .then((res) => {
+        const deletePromises = res.items.map((itemRef) => deleteObject(itemRef));
+        Promise.all(deletePromises)
+          .then(() => {
+            console.log('All items deleted from Firebase Storage successfully.');
+            resolve();
+          })
+          .catch((error) => {
+            console.error('Error deleting items from Firebase Storage:', error);
+            reject(error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error listing items in 'cart' folder:", error);
+        reject(error);
+      });
+  });
+}
+
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+  checkout();
+});
+
+  
+// List all images when the page loads
+ listAllImages();
