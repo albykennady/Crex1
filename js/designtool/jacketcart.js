@@ -16,7 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const storage = getStorage(app);
-const username = 'Rayan';
 // Get the Proceed button element
 const proceedButton = document.getElementById('Addtocart');
  
