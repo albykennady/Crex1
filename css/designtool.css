@@ -1,0 +1,353 @@
+.drawing-area {
+    position: absolute;
+    top: 150px;
+    left: 122px;
+    z-index: 10;
+    width: 200px;
+    height: 400px;
+}
+ 
+.canvas-container {
+    width: 200px;
+    height: 400px;
+    position: relative;
+    user-select: none;
+}
+ 
+#tshirt-div {
+    width: 452px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+ 
+#canvas {
+    position: absolute;
+    width: 100px;
+    height: 300px;
+    left: 0px;
+    top: 0px;
+    user-select: none;
+    cursor: default;
+}
+ 
+.logo-card {
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 5px;
+    transition: transform 0.2s;
+    height: 60px;
+    width: 200px;
+}
+ 
+.logo-card:hover {
+    transform: scale(1.1);
+}
+ 
+#logo-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+ 
+#logo-selection .logo-card {
+    background-color: #ece9e9;
+}
+ 
+#logo-selection img {
+    width: 100%;
+    height: auto;
+    background-color: #d6d4d4;
+}
+ 
+.button-design {
+    background-color: #ffffff;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+}
+ 
+.btn-white {
+    background-color: white;
+    color: black;
+    border: 2px solid #dfdfdf;
+}
+ 
+.btn-white:hover {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
+ 
+.btn-black {
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+}
+ 
+.btn-black:hover {
+    background-color: rgb(255, 255, 255); /* Pure white */
+    color: black;
+}
+ 
+.btn-blue {
+    background-color: rgb(3, 104, 199);
+    color: white;
+    border: 2px solid rgb(3, 104, 199);
+}
+ 
+.btn-blue:hover {
+    background-color: #ffffff;
+    color: black;
+}
+ 
+.btn-green {
+    background-color: rgb(17, 140, 3);
+    color: white;
+    border: 2px solid rgb(17, 140, 3);
+}
+ 
+.btn-green:hover {
+    background-color: white;
+    color: black;
+}
+.btn-orange {
+    background-color: rgb(219, 105, 29);
+    color: white;
+    border: 2px solid  rgb(219, 105, 29);
+}
+ 
+.btn-orange:hover {
+    background-color: white;
+    color: black;
+}
+.btn-yellow {
+    background-color: rgb(221, 211, 14);
+    color: white;
+    border: 2px solid  rgb(221, 211, 14);
+}
+ 
+.btn-yellow:hover {
+    background-color: white;
+    color: black;
+}
+.btn-brown {
+    background-color: rgb(121, 17, 17);
+    color: white;
+    border: 2px solid  rgb(121, 17, 17);
+}
+ 
+.btn-brown:hover {
+    background-color: white;
+    color: black;
+}
+ 
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+ 
+.delete-icon {
+    align-self: flex-start;
+}
+ 
+.color-buttons {
+    margin-top: 0px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+}
+ 
+.color-buttons button {
+    width: 100%;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+ 
+.color-buttons button:hover {
+    filter: brightness(80%);
+}
+ 
+.add-to-cart {
+    border: none;
+    color: rgb(255, 255, 255);
+    background-color: red;
+    border-radius: 10px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+
+/* Hoodie designing */
+
+#hoodie-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+
+#hoodie-div {
+    width: 400px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.hoodie-drawing-area {
+    position: absolute;
+    top: 110px;
+    left: 122px;
+    z-index: 10;
+    width: 200px;
+    height: 400px;
+}
+
+
+
+/** Totebag designing */ 
+
+#totebag-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  
+}
+
+#totebag-div {
+    width: 400px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.totebag-drawing-area {
+    position: absolute;
+    top: 250px;
+    left: 125px;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}
+
+
+/** Raincoat designing */ 
+
+#raincoat-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+   
+}
+
+#raincoat-div {
+    width: 400px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.raincoat-drawing-area {
+    position: absolute;
+    top: 150px;
+    left: 170px;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}
+
+
+/** Jacket designing */ 
+
+#jacket-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+   
+}
+
+#jacket-div {
+    width: 400px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.jacket-drawing-area {
+    position: absolute;
+    top: 70px;
+    left: 130px;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}
+
+
+/** Cap designing */ 
+
+#cap-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+   
+}
+
+#cap-div {
+    width: 400px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.cap-drawing-area {
+    position: absolute;
+    top: 150px;
+    left: 100px;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}
+
+
+/** Sweater designing */ 
+
+#sweater-backgroundpicture img {
+    position: absolute;
+    top: 0;
+    left: 0;
+   
+}
+
+#sweater-div {
+    width: 400px;
+    height: 548px;
+    position: relative;
+    background-color: #fff;
+}
+.sweater-drawing-area {
+    position: absolute;
+    top: 150px;
+    left: 130px;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}
