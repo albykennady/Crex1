@@ -21,10 +21,10 @@ const firebaseConfig = {
  async function displayImagesFromFirestore() {
     imageContainer.innerHTML = '';
     try {
-      const querySnapshot = await getDocs(collection(db, 'images'));
+      const querySnapshot = await getDocs(collection(db, 'onam'));
       querySnapshot.forEach((doc) => {
         const logoCard = document.createElement('div');
-        logoCard.classList.add('logo-card');
+        logoCard.classList.add('logo-card-onam');
         const imgElement = document.createElement('img');
         imgElement.src = doc.data().dataUrl;
         imgElement.className = 'img-thumbnail';
@@ -40,7 +40,7 @@ const firebaseConfig = {
         
   
         // Append the logo card to the logo-selection div
-        document.getElementById('logo-selection').appendChild(logoCard);
+        document.getElementById('logo-selection-onam').appendChild(logoCard);
       });
     } catch (error) {
       console.error('Error getting images:', error);
@@ -48,26 +48,3 @@ const firebaseConfig = {
   }
 
   displayImagesFromFirestore();
-
-// document.getElementById('screenshotButton').addEventListener('click', function(event) {
-//     event.preventDefault();
-  
-//     html2canvas(document.getElementById('tshirt-div'), {
-//       useCORS: true, // Enable CORS if capturing cross-origin content
-//       logging: true // Enable logging for debugging
-//     }).then(function(canvas) {
-//       // Get the image data URL from the canvas
-//       const imageDataURL = canvas.toDataURL();
-  
-//       // Create a link to download the image
-//       const link = document.createElement('a');
-//       link.href = imageDataURL;
-//       link.download = 'tshirt-design.png';
-//       link.click();
-  
-//       // Remove the link from the DOM
-//       link.remove();
-//     }).catch(function(error) {
-//       console.error('Error capturing screenshot:', error);
-//     });
-//   });
