@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/designtool.css">
+    <link rel="stylesheet" href="css/tshirt.css">
+    <title>DesignTool-Hoodie</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+    
+
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/hompageassets/crexx.png" alt="CREx Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="#">My Projects</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a id="welcome-message">Hi! User</a></li>
+                    <li><a id="logout-button">Logout</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+    </header>
+    <header class="secondnav">
+        <div class="container-second">
+            <nav>
+                <ul>
+                    <li id="sec"><a href="designtool.html">T-Shirt</a></li>
+                    <li id="sec"><a href="designtool-jacket.html">Jacket</a></li>
+                    <li id="sec"><a href="designtool-cap.html">Cap</a></li>
+                    <li id="sec"><a href="designtool-sweater.html">Sweater</a></li>
+                    <li id="sec"><a href="designtool-totebag.html">Tote Bag</a></li>
+                    <li id="sec"><a href="#">Umbrella</a></li>
+                    <li id="sec"><a href="designtool-hoodie.html">Hoodies</a></li>
+                    <li id="sec"><a href="designtool-onam.html">Onam 24</a></li>
+                   
+                </ul>
+            </nav>
+            
+                
+        </div>
+    </header>
+
+<div class="container" style="padding: 20px 5px;">
+    <div class="card mb-3" style="max-width: auto;">
+        <div class="card-body">
+            <center><h4 class="card-title">Custom Hoodie Design Tool</h4></center><br>
+            <div class="row" style="padding: 10px 0px;">
+                <div class="col-md-3">
+                    <!-- The logo selection cards -->
+                    <label for="raincoat-design">Hoodie Logos:</label>
+                    <div id="logo-selection">
+                        <!-- Firebase logos will be loaded here -->
+                    </div>
+                    <div class="row" id="imageContainer">
+                        <!-- Images will be displayed here -->
+                      </div>
+                </div>
+                <div class="col-md-5">
+                    <div id="hoodie-div">
+                       
+                        <div id="hoodie-backgroundpicture">
+                            <img id="hoodie-backgroundpicture1" src="assets/designtoolassets/hoodieblack.png" width=""/>
+                            <img id="hoodie-backgroundpicture2" src="assets/designtoolassets/hoodiegrey.png" width="" style="display: none"/>
+                            <img id="hoodie-backgroundpicture3" src="assets/designtoolassets/hoodieblue.png" width="" style="display: none;"/>
+                        </div>
+                        
+                        <div id="drawingArea" class="hoodie-drawing-area">
+                            <div class="canvas-container-hoodie">
+                                <canvas id="hoodie-canvas" width="260" height="270"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-md-3" >
+                    <div class="control-panel">
+                        <img src="assets/designtoolassets/bin.png" class="delete-icon" onclick="deleteObject()" width="40px" height="40px">  
+                        <div class="color-buttons">
+                          
+                            <button type="button" class="btn btn-black button-design" onclick="changeHoodieColor(1)">Black</button>
+                            <button type="button" class="btn btn-white button-design" onclick="changeHoodieColor(2)">White</button>
+                            <button type="button" class="btn btn-blue button-design" onclick="changeHoodieColor(3)">Blue</button>
+                                
+                           
+                        </div>
+                        <button type="button" class="add-to-cart" id="Addtocart">Add to Cart</button>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <p>crafted with love by <span>experion</span></p>
+        <p>Digitally Driven</p>
+    </div>
+</footer>
+
+<!-- Include Fabric.js in the page -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+<script src="js/designtool/design-fetch.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.3/dist/html2canvas.min.js"></script>
+<script src="js/designtool/hoodiecart.js"type="module"></script>
+
+<!-- Firebase JS SDK -->
+<script>
+    
+    var canvas = new fabric.Canvas('hoodie-canvas');
+
+    // Function to delete selected object
+    function deleteObject() {
+        var activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            canvas.remove(activeObject);
+        }
+    }
+
+    // Function to add a delete button to selected objects
+function addDeleteButton(obj) {
+    var deleteIcon = new fabric.Text('x', {
+        left: obj.left + obj.width / 2,
+        top: obj.top - obj.height / 2,
+        fontSize: 20,
+        originX: 'center',
+        originY: 'center',
+        fill: 'white',
+        fontWeight: 'bold',
+        selectable: false,
+        hasControls: false,
+        hasBorders: false,
+        backgroundColor: 'red',
+        padding: 5,
+        borderRadius: 15,
+        cursor: 'pointer'
+    });
+
+    deleteIcon.on('mousedown', function() {
+        canvas.remove(obj);
+        canvas.remove(deleteIcon);
+    });
+
+    canvas.add(deleteIcon);
+}
+    // Update T-shirt image function (example)
+    function updateTshirtImage(imageURL) {
+        fabric.Image.fromURL(imageURL, function(img) {
+            img.scaleToHeight(300);
+            img.scaleToWidth(300);
+            canvas.centerObject(img);
+            canvas.add(img);
+            canvas.renderAll();
+            
+            // Add delete button on image select
+            addDeleteButton(img.left + img.width / 2, img.top - img.height / 2);
+        });
+    }
+    function changeHoodieColor(id) {
+    document.getElementById('hoodie-backgroundpicture1').style.display = (id === 1) ? 'block' : 'none';
+    document.getElementById('hoodie-backgroundpicture2').style.display = (id === 2) ? 'block' : 'none';
+    document.getElementById('hoodie-backgroundpicture3').style.display = (id === 3) ? 'block' : 'none';
+}
+
+</script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script>
+    // Firebase initialization (use your existing config)
+    const firebaseConfig = {
+      apiKey: "AIzaSyDczLLPnaREY3SahAMeKJ-DOMyVENmWwLk",
+      authDomain: "crex-f9f68.firebaseapp.com",
+      projectId: "crex-f9f68",
+      storageBucket: "crex-f9f68.appspot.com",
+      messagingSenderId: "209664661907",
+      appId: "1:209664661907:web:933435dab65ebb20913066",
+      databaseURL: "https://crex-f9f68-default-rtdb.firebaseio.com"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Get the username from localStorage and display it
+    const username = localStorage.getItem('username');
+    document.getElementById('welcome-message').textContent = 'Hi! ' + username;
+
+    // Logout functionality
+    document.getElementById('logout-button').addEventListener('click', () => {
+      auth.signOut().then(() => {
+        localStorage.removeItem('username');
+        window.location.href = 'login.html'; // Redirect to login page
+      }).catch(error => {
+        console.error('Error signing out:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error logging out',
+          text: error.message,
+          confirmButtonText: 'OK'
+        });
+      });
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</body>
+</html>

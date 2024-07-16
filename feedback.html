@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="css/feedback.css">
+</head>
+<body>
+    <header style="z-index:1; position: relative;">
+        <div class="container"  >
+            <div class="logo">
+                <img src="assets/hompageassets/crexx.png" alt="CREx Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="myprojects.html">My Projects</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a id="welcome-message">Hi! User</a></li>
+                    <li><a id="logout-button">Logout</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+    </header>
+  
+    <!-- ATHIRA SECTION  -->
+    <div class="feedback">
+        <div class="feedback-container">
+            <div class="thankyou-msg">
+                <p>Thank you for shopping with us </p>
+            </div>
+            <h2 style="font-size:20px;">Send us your feedback!</h2>
+            <p style="font-size:18px;">Based on your recent online purchase, how likely are you to recommend us to a colleague or client?</p>
+            <div class="rating-container">
+                <input type="radio" id="rate0" name="rating" value="0">
+                <label for="rate0">0</label>
+                <input type="radio" id="rate1" name="rating" value="1">
+                <label for="rate1">1</label>
+                <input type="radio" id="rate2" name="rating" value="2">
+                <label for="rate2">2</label>
+                <input type="radio" id="rate3" name="rating" value="3">
+                <label for="rate3">3</label>
+                <input type="radio" id="rate4" name="rating" value="4">
+                <label for="rate4">4</label>
+                <input type="radio" id="rate5" name="rating" value="5">
+                <label for="rate5">5</label>
+                <input type="radio" id="rate6" name="rating" value="6">
+                <label for="rate6">6</label>
+                <input type="radio" id="rate7" name="rating" value="7">
+                <label for="rate7">7</label>
+                <input type="radio" id="rate8" name="rating" value="8">
+                <label for="rate8">8</label>
+                <input type="radio" id="rate9" name="rating" value="9">
+                <label for="rate9">9</label>
+                <input type="radio" id="rate10" name="rating" value="10">
+                <label for="rate10">10</label>
+            </div>
+            <p  style="font-size:18px;">Would you like to add a comment?</p>
+            <textarea id="comment" placeholder="Enter your comment here..."></textarea>
+            <button id="submitFeedbackButton" class="submit-button">Submit</button>
+        </div>
+        
+    </div>
+    <script type="module" src="js/feedback.js"></script>
+    <!-- ATHIRA SECTION END -->
+    <footer style="position: relative;">
+        <div class="container">
+            <p>crafted with love by <span>experion</span></p>
+            <p>Digitally Driven</p>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script>
+    // Firebase initialization (use your existing config)
+    const firebaseConfig = {
+      apiKey: "AIzaSyDczLLPnaREY3SahAMeKJ-DOMyVENmWwLk",
+      authDomain: "crex-f9f68.firebaseapp.com",
+      projectId: "crex-f9f68",
+      storageBucket: "crex-f9f68.appspot.com",
+      messagingSenderId: "209664661907",
+      appId: "1:209664661907:web:933435dab65ebb20913066",
+      databaseURL: "https://crex-f9f68-default-rtdb.firebaseio.com"
+    };
+ 
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+ 
+    // Get the username from localStorage and display it
+    const username = localStorage.getItem('username');
+    document.getElementById('welcome-message').textContent = 'Hi! ' + username;
+ 
+    // Logout functionality
+    document.getElementById('logout-button').addEventListener('click', () => {
+      auth.signOut().then(() => {
+        localStorage.removeItem('username');
+        window.location.href = 'login.html'; // Redirect to login page
+      }).catch(error => {
+        console.error('Error signing out:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error logging out',
+          text: error.message,
+          confirmButtonText: 'OK'
+        });
+      });
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

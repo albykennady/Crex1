@@ -1,0 +1,215 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: montserrat;
+}
+
+body {
+
+    line-height: 1.6;
+}
+
+header {
+    background-image: linear-gradient(45deg,#B3011C,#E60124);
+    color: white;
+    padding: 10px 0;
+    width: 100%;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 120px;
+    
+}
+header .container-second {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    max-width: 1200px;
+    /* margin: 0 auto; */
+    padding: 0 20px;
+    height: 120px;
+}
+
+header .logo img {
+    height: 60px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 50px;
+    text-align: center;
+}
+
+#sec{
+    margin-left: 60px;
+    text-align: center;
+    width: 160px;
+
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    
+
+    
+}
+
+.hero {
+    background-image: url('../assets/hompageassets/eXPERION-BANNE.jpg');
+    background-size: cover;
+    /* background-position: center; */
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    height: 1000px;
+}
+
+.hero h1 {
+    font-size: 3em;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    justify-content: space-evenly;
+}
+#textdec{
+    color: black;
+    text-decoration: none;
+}
+
+.categories, .popular-products, .custom-design {
+    padding: 50px 0;
+}
+
+.categories h2, .popular-products h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.category-list, .product-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.category-item, .product-item {
+    flex: 1 1 200px;
+    text-align: center;
+    margin: 10px;
+    
+}
+
+.category-item img, .product-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.custom-design {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.custom-design img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.custom-design .design-info {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.custom-design .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e60023;
+    color: white;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+footer {
+    background-color: #e60023;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+footer span {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+@media (max-width: 768px) {
+    header .container, .container {
+        padding: 0 10px;
+    }
+
+    .category-list, .product-list {
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    .category-item, .product-item {
+        flex: 1 1 100%;
+        margin-bottom: 20px;
+    }
+
+    .custom-design .design-info {
+        text-align: center;
+    }
+}
+
+/* button css */
+/* Style the button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #B3011C;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  /* Add a hover effect */
+  /* .back-to-top:hover {
+    background-color: #444;
+  } */
+
+
+  .drawer-toggle, .drawer-toggle-second {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
