@@ -59,6 +59,30 @@ proceedButton.addEventListener('click', async function(event) {
           });
         }
       );
+
+      //Create a new firebase storage refenerence for the username design
+const storageRefUser = ref(storage, `Users/${username}/${fileName}.png`);
+      
+const uploadTaskUser = uploadBytesResumable(storageRefUser, blob);
+uploadTaskUser.on('state_changed', 
+  (snapshot) => {
+    // Handle upload progress
+  }, 
+  (error) => {
+    console.error('Error uploading image:', error);
+  }, 
+  () => {
+    // Handle successful upload
+    getDownloadURL(uploadTaskUser.snapshot.ref).then((downloadURL) => {
+      console.log('Image uploaded successfully! Download URL:', downloadURL);
+      // Add the image to the cart or database
+      //...
+    });
+  }
+);
+      
+
+
  
       // Create a new Firebase Storage reference for the cart
       const storageRefCart = ref(storage, `CartFolder/cart/${fileName}.png`);

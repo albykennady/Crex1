@@ -49,25 +49,3 @@ const firebaseConfig = {
 
   displayImagesFromFirestore();
 
-// document.getElementById('screenshotButton').addEventListener('click', function(event) {
-//     event.preventDefault();
-  
-//     html2canvas(document.getElementById('tshirt-div'), {
-//       useCORS: true, // Enable CORS if capturing cross-origin content
-//       logging: true // Enable logging for debugging
-//     }).then(function(canvas) {
-//       // Get the image data URL from the canvas
-//       const imageDataURL = canvas.toDataURL();
-  
-//       // Create a link to download the image
-//       const link = document.createElement('a');
-//       link.href = imageDataURL;
-//       link.download = 'tshirt-design.png';
-//       link.click();
-  
-//       // Remove the link from the DOM
-//       link.remove();
-//     }).catch(function(error) {
-//       console.error('Error capturing screenshot:', error);
-//     });
-//   });

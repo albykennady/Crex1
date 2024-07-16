@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendors and T-shirts</title>
+    <link rel="stylesheet" href="tshirt-vendor.css"> <!-- Link to your separate CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Vendors and T-shirts</h1>
+        <label for="tshirt-count">Show vendors with at least this many T-shirts:</label>
+        <input type="number" id="tshirt-count" name="tshirt-count" min="0" value="0">
+        <button onclick="filterVendors()" id="filter">Filter</button>
+        <div id="vendors"></div>
+    </div>
+
+    <script>
+        const apiBaseUrl = 'http://localhost:3000';
+
+        async function fetchVendors() {
+            const response = await fetch(`${apiBaseUrl}/vendors`);
+            const vendors = await response.json();
+            return vendors;
+        }
+
+        function displayVendors(vendors) {
+            const vendorsDiv = document.getElementById('vendors');
+            vendorsDiv.innerHTML = '';
+            vendors.forEach(vendor => {
+                const vendorDiv = document.createElement('div');
+                vendorDiv.className = 'vendor';
+                vendorDiv.innerHTML = `
+                    <h2>${vendor.name}</h2>
+                    <p>T-shirts available: ${vendor.tshirts.length}</p>
+                    <button onclick="toggleTshirts(${vendor.id})" class="show-more">Show More</button>
+                    <ul id="tshirt-list-${vendor.id}" class="tshirt-list">
+                        ${vendor.tshirts.map(tshirt => `<li>ID: ${tshirt.id}, Size: ${tshirt.size}, Price: $${tshirt.price.toFixed(2)}</li>`).join('')}
+                    </ul>
+                `;
+                vendorsDiv.appendChild(vendorDiv);
+            });
+        }
+
+        function toggleTshirts(vendorId) {
+            const tshirtList = document.getElementById(`tshirt-list-${vendorId}`);
+            tshirtList.classList.toggle('show');
+            const showMoreButton = document.querySelector(`#tshirt-list-${vendorId} + .show-more`);
+            showMoreButton.classList.toggle('expanded');
+            showMoreButton.textContent = showMoreButton.classList.contains('expanded') ? 'Show Less' : 'Show More';
+        }
+
+        async function filterVendors() {
+            const tshirtCount = parseInt(document.getElementById('tshirt-count').value);
+            const vendors = await fetchVendors();
+            const filteredVendors = vendors.filter(vendor => vendor.tshirts.length >= tshirtCount);
+            displayVendors(filteredVendors);
+        }
+
+        // Fetch and display all vendors initially
+        (async function initialize() {
+            const vendors = await fetchVendors();
+            displayVendors(vendors);
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!-- This page has a css file connected to tshirt.css -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/tshirt.css">
+    <link rel="stylesheet" href="css/myprojects.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/hompageassets/crexx.png" alt="CREx Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="homepage.html">Home</a></li>
+                    <li><a href="#">My Projects</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a id="welcome-message">Hi! User</a></li>
+                    <li><a id="logout-button">Logout</a></li>
+                </ul>
+            </nav>
+            
+        </div>
+    </header>
+    <header class="secondnav">
+        <div class="container-second">
+            <nav>
+                <ul>
+                    <li id="sec"><a href="designtool.html">T-Shirt</a></li>
+                    <li id="sec"><a href="designtool-jacket.html">Jacket</a></li>
+                    <li id="sec"><a href="designtool-cap.html">Cap</a></li>
+                    <li id="sec"><a href="designtool-sweater.html">Sweater</a></li>
+                    <li id="sec"><a href="designtool-totebag.html">Tote Bag</a></li>
+                    <li id="sec"><a href="#">Umbrella</a></li>
+                    <li id="sec"><a href="designtool-hoodie.html">Hoodies</a></li>
+                    <li id="sec"><a href="#">Water Bottle</a></li>
+                   
+                   
+                </ul>
+            </nav>
+            
+                
+        </div>
+    </header>
+    <div id="images"></div>
+    <!-- myprojects starts Here -->
+ 
+    <!-- Myprojects Ended-->
+
+    <footer>
+        <div class="container">
+            <p>crafted with love by <span>experion</span></p>
+            <p>Digitally Driven</p>
+        </div>
+    </footer>
+    
+    <script type="module" src="js/myprojects.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script>
+    // Firebase initialization (use your existing config)
+    const firebaseConfig = {
+      apiKey: "AIzaSyDczLLPnaREY3SahAMeKJ-DOMyVENmWwLk",
+      authDomain: "crex-f9f68.firebaseapp.com",
+      projectId: "crex-f9f68",
+      storageBucket: "crex-f9f68.appspot.com",
+      messagingSenderId: "209664661907",
+      appId: "1:209664661907:web:933435dab65ebb20913066",
+      databaseURL: "https://crex-f9f68-default-rtdb.firebaseio.com"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Get the username from localStorage and display it
+    const username = localStorage.getItem('username');
+    document.getElementById('welcome-message').textContent = 'Hi! ' + username;
+
+    // Logout functionality
+    document.getElementById('logout-button').addEventListener('click', () => {
+      auth.signOut().then(() => {
+        localStorage.removeItem('username');
+        window.location.href = 'login.html'; // Redirect to login page
+      }).catch(error => {
+        console.error('Error signing out:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error logging out',
+          text: error.message,
+          confirmButtonText: 'OK'
+        });
+      });
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+</body>
+</html>

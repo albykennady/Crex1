@@ -200,8 +200,16 @@ footer span {
   }
   
   /* Add a hover effect */
-  .back-to-top:hover {
+  /* .back-to-top:hover {
     background-color: #444;
-  }
+  } */
 
 
+  .drawer-toggle, .drawer-toggle-second {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
