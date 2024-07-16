@@ -46,77 +46,6 @@
 .logo-card:hover {
     transform: scale(1.1);
 }
-<<<<<<< HEAD
-
-#logo-selection {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-#logo-selection .logo-card {
-    background-color: #ece9e9;
-}
-
-#logo-selection img {
-    width: 100%;
-    height: auto;
-    background-color: #d6d4d4;
-}
-
-/* Onam starts here */
-
-.logo-card-onam {
-    cursor: pointer;
-    display: inline-block;
-    margin: 5px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 5px;
-    transition: transform 0.2s;
-    height: 240px;
-    width: 200px;
-}
-
-.logo-card-onam:hover {
-    transform: scale(1.1);
-}
-
-#logo-selection-onam {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-#logo-selection-onam .logo-card {
-    background-color: #ece9e9;
-}
-
-#logo-selection-onam img {
-    width: 100%;
-    height: auto;
-    background-color: #d6d4d4;
-}
-/* Onam ends here */
-
-.button-design {
-    background-color: #ffffff; 
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 5px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-    padding: 10px;
-=======
  
 #logo-selection {
     display: flex;
@@ -271,17 +200,17 @@
     transition-duration: 0.4s;
     cursor: pointer;
 }
-
-
+ 
+ 
 /* Hoodie designing */
-
+ 
 #hoodie-backgroundpicture img {
     position: absolute;
     top: 0;
     left: 0;
-    
+   
 }
-
+ 
 #hoodie-div {
     width: 400px;
     height: 548px;
@@ -295,109 +224,19 @@
     z-index: 10;
     width: 200px;
     height: 400px;
->>>>>>> d6299462237f51fd4c31f8e1a4c5c2c64f3280cc
 }
-
-.btn-white {
-    background-color: white; 
-    color: black; 
-    border: 2px solid #dfdfdf;
-}
-
-<<<<<<< HEAD
-.btn-white:hover {
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-}
-
-.btn-black {
-    background-color: black; 
-    color: white; 
-    border: 2px solid black;
-}
-
-.btn-black:hover {
-    background-color: rgb(255, 255, 255); /* Pure white */
-    color: black;
-}
-
-.btn-blue {
-    background-color: rgb(3, 104, 199); 
-    color: white; 
-    border: 2px solid rgb(3, 104, 199);
-}
-
-.btn-blue:hover {
-    background-color: #ffffff;
-    color: black;
-}
-
-.btn-green {
-    background-color: rgb(17, 140, 3); 
-    color: white; 
-    border: 2px solid rgb(17, 140, 3);
-}
-
-.btn-green:hover {
-    background-color: white;
-    color: black;
-}
-
-.control-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.delete-icon {
-    align-self: flex-start;
-}
-
-.color-buttons {
-    margin-top: 0px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    width: 100%;
-}
-
-.color-buttons button {
-    width: 100%;
-    padding: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.color-buttons button:hover {
-    filter: brightness(80%);
-}
-
-.add-to-cart {
-    border: none;
-    color: rgb(255, 255, 255);
-    background-color: red;
-    border-radius: 10px;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-}
-=======
-
-/** Totebag designing */ 
-
+ 
+ 
+ 
+/** Totebag designing */
+ 
 #totebag-backgroundpicture img {
     position: absolute;
     top: 0;
     left: 0;
-  
+ 
 }
-
+ 
 #totebag-div {
     width: 400px;
     height: 548px;
@@ -412,17 +251,17 @@
     width: 100px;
     height: 100px;
 }
-
-
-/** Raincoat designing */ 
-
+ 
+ 
+/** Raincoat designing */
+ 
 #raincoat-backgroundpicture img {
     position: absolute;
     top: 0;
     left: 0;
    
 }
-
+ 
 #raincoat-div {
     width: 400px;
     height: 548px;
@@ -437,17 +276,17 @@
     width: 100px;
     height: 100px;
 }
-
-
-/** Jacket designing */ 
-
+ 
+ 
+/** Jacket designing */
+ 
 #jacket-backgroundpicture img {
     position: absolute;
     top: 0;
     left: 0;
    
 }
-
+ 
 #jacket-div {
     width: 400px;
     height: 548px;
@@ -462,17 +301,17 @@
     width: 100px;
     height: 100px;
 }
-
-
-/** Cap designing */ 
-
+ 
+ 
+/** Cap designing */
+ 
 #cap-backgroundpicture img {
     position: absolute;
     top: 0;
     left: 0;
    
 }
-
+ 
 #cap-div {
     width: 400px;
     height: 548px;
@@ -487,17 +326,17 @@
     width: 100px;
     height: 100px;
 }
-
-
-/** Sweater designing */ 
-
+ 
+ 
+/** Sweater designing */
+ 
 #sweater-backgroundpicture img {
     position: absolute;
     top: 0;
     left: 0;
    
 }
-
+ 
 #sweater-div {
     width: 400px;
     height: 548px;
@@ -512,4 +351,39 @@
     width: 100px;
     height: 100px;
 }
->>>>>>> d6299462237f51fd4c31f8e1a4c5c2c64f3280cc
+
+
+/* Onam starts here */
+
+.logo-card-onam {
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 5px;
+    transition: transform 0.2s;
+    height: 240px;
+    width: 200px;
+}
+
+.logo-card-onam:hover {
+    transform: scale(1.1);
+}
+
+#logo-selection-onam {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#logo-selection-onam .logo-card {
+    background-color: #ece9e9;
+}
+
+#logo-selection-onam img {
+    width: 100%;
+    height: auto;
+    background-color: #d6d4d4;
+}
+/* Onam ends here */
